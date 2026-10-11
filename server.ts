@@ -3,7 +3,6 @@ import dotenv from 'dotenv';
 import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
-import { createServer as createViteServer } from 'vite';
 import {
   GEMINI_MODEL,
   hasGeminiKey,
@@ -101,11 +100,10 @@ const handleHealth = (_req: Request, res: Response) => {
   });
 };
 
-app.get('/health', handleHealth);
-app.get('/api/health', handleHealth);
+app.get(['/health', '/api/health'], handleHealth);
 
 // Configuration status endpoint
-app.get('/api/config-status', (_req: Request, res: Response) => {
+app.get(['/api/config-status', '/config-status'], (_req: Request, res: Response) => {
   const configured = hasGeminiKey();
   res.json({
     configured,
@@ -118,7 +116,7 @@ app.get('/api/config-status', (_req: Request, res: Response) => {
 });
 
 // POST /api/set-api-key - Dynamically configure & verify Gemini API key
-app.post('/api/set-api-key', async (req: Request, res: Response): Promise<void> => {
+app.post(['/api/set-api-key', '/set-api-key'], async (req: Request, res: Response): Promise<void> => {
   try {
     const { apiKey, test = true } = req.body;
     if (!apiKey || typeof apiKey !== 'string' || apiKey.trim().length < 15) {
@@ -215,7 +213,7 @@ app.post('/api/set-api-key', async (req: Request, res: Response): Promise<void> 
 });
 
 // POST /api/analyze - Robotic Language Analysis
-app.post('/api/analyze', async (req: Request, res: Response): Promise<void> => {
+app.post(['/api/analyze', '/analyze'], async (req: Request, res: Response): Promise<void> => {
   try {
     const { text, context = 'general_professional' } = req.body;
     const validation = validateInputParams(text, context, 'professional');
@@ -244,7 +242,7 @@ app.post('/api/analyze', async (req: Request, res: Response): Promise<void> => {
 });
 
 // POST /api/humanize - AI Humanization
-app.post('/api/humanize', async (req: Request, res: Response): Promise<void> => {
+app.post(['/api/humanize', '/humanize'], async (req: Request, res: Response): Promise<void> => {
   try {
     const {
       text,
@@ -287,7 +285,7 @@ app.post('/api/humanize', async (req: Request, res: Response): Promise<void> => 
 });
 
 // POST /api/validate - Revalidate or validate arbitrary rewritten text
-app.post('/api/validate', async (req: Request, res: Response): Promise<void> => {
+app.post(['/api/validate', '/validate'], async (req: Request, res: Response): Promise<void> => {
   try {
     const {
       originalText,
@@ -350,7 +348,7 @@ app.post('/api/validate', async (req: Request, res: Response): Promise<void> => 
 });
 
 // POST /api/process-all - Full End-to-End Workflow Pipeline
-app.post('/api/process-all', async (req: Request, res: Response): Promise<void> => {
+app.post(['/api/process-all', '/process-all'], async (req: Request, res: Response): Promise<void> => {
   try {
     const {
       text,
@@ -393,10 +391,29 @@ app.post('/api/process-all', async (req: Request, res: Response): Promise<void> 
   }
 });
 
+// Catch-all 404 handler for unmatched API routes (guarantees valid JSON instead of HTML)
+app.all(['/api', '/api/*'], (req: Request, res: Response) => {
+  res.status(404).json({
+    error: `API route not found: ${req.method} ${req.originalUrl || req.url}`,
+    code: 'NOT_FOUND',
+  });
+});
+
+// Global Error Handler guaranteeing JSON responses
+app.use((err: any, _req: Request, res: Response, _next: any) => {
+  console.error('[API Uncaught Error]:', err);
+  const status = err.status || err.statusCode || 500;
+  res.status(status).json({
+    error: err.message || 'An unexpected server error occurred',
+    code: 'INTERNAL_ERROR',
+  });
+});
+
 // Setup dev vs production static serving
 async function startServer() {
   if (!isProd) {
-    // Development mode with Vite middleware
+    // Development mode with Vite middleware (dynamic import so production/serverless bundles never bundle Vite)
+    const { createServer: createViteServer } = await import('vite');
     const vite = await createViteServer({
       server: { middlewareMode: true, hmr: process.env.DISABLE_HMR !== 'true' },
       appType: 'spa',

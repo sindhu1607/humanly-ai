@@ -12,6 +12,7 @@ import {
   Loader2,
   FileCode,
 } from 'lucide-react';
+import { safeParseApiResponse } from '../utils/apiClient.ts';
 
 interface ApiKeyModalProps {
   isOpen: boolean;
@@ -65,13 +66,18 @@ export const ApiKeyModal: React.FC<ApiKeyModalProps> = ({
         }),
       });
 
-      const data = await res.json();
+      const parsed = await safeParseApiResponse<{ message?: string }>(
+        res,
+        'Failed to configure API key'
+      );
 
-      if (!res.ok) {
-        throw new Error(data.error || 'Failed to configure API key.');
+      if (!parsed.ok) {
+        throw new Error(parsed.error || 'Failed to configure API key.');
       }
 
-      setSuccessMessage(data.message || 'Gemini API key configured and activated successfully!');
+      setSuccessMessage(
+        parsed.data?.message || 'Gemini API key configured and activated successfully!'
+      );
       setApiKey('');
       onKeyConfigured();
 

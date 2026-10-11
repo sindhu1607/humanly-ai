@@ -28,6 +28,7 @@ import {
   CompleteValidationResult,
 } from './types/humanly.ts';
 import { SamplePreset } from './data/presetSamples.ts';
+import { safeParseApiResponse } from './utils/apiClient.ts';
 
 function HumanlyPlayground() {
   const { user } = useAuth();
@@ -59,10 +60,10 @@ function HumanlyPlayground() {
     setIsCheckingConfig(true);
     try {
       const res = await fetch('/api/config-status');
-      if (res.ok) {
-        const data = await res.json();
-        setApiConfigured(Boolean(data.configured));
-        if (data.model) setModelName(data.model);
+      const parsed = await safeParseApiResponse<{ configured: boolean; model?: string }>(res);
+      if (parsed.ok && parsed.data) {
+        setApiConfigured(Boolean(parsed.data.configured));
+        if (parsed.data.model) setModelName(parsed.data.model);
       }
     } catch (e) {
       console.warn('Unable to reach config-status endpoint:', e);
@@ -121,13 +122,16 @@ function HumanlyPlayground() {
         }),
       });
 
-      const data = await response.json();
+      const parsed = await safeParseApiResponse<HumanizeResponse>(
+        response,
+        'Failed to process communication'
+      );
 
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to process communication.');
+      if (!parsed.ok) {
+        throw new Error(parsed.error || 'Failed to process communication.');
       }
 
-      setResult(data);
+      setResult(parsed.data!);
     } catch (err: any) {
       console.error('Humanize workflow error:', err);
       setError(
@@ -159,11 +163,15 @@ function HumanlyPlayground() {
         }),
       });
 
-      const data = await response.json();
-      if (!response.ok) {
-        throw new Error(data.error || 'Validation failed.');
+      const parsed = await safeParseApiResponse<CompleteValidationResult>(
+        response,
+        'Validation failed'
+      );
+
+      if (!parsed.ok) {
+        throw new Error(parsed.error || 'Validation failed.');
       }
-      return data as CompleteValidationResult;
+      return parsed.data!;
     } catch (err: any) {
       console.error('Revalidation error:', err);
       setError(err.message || 'Failed to rerun factuality validation on edited text.');
