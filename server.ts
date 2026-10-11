@@ -44,10 +44,18 @@ const ALLOWED_ORIGINS = new Set([
     : []),
 ]);
 
-// CORS Middleware with origin restriction
+// CORS Middleware with origin restriction and Vercel support
 app.use((req, res, next) => {
   const origin = req.headers.origin;
-  if (origin && (ALLOWED_ORIGINS.has(origin) || !isProd)) {
+  const isVercel = Boolean(process.env.VERCEL);
+  const isAllowedOrigin =
+    !origin ||
+    !isProd ||
+    isVercel ||
+    ALLOWED_ORIGINS.has(origin) ||
+    (origin && origin.endsWith('.vercel.app'));
+
+  if (isAllowedOrigin && origin) {
     res.header('Access-Control-Allow-Origin', origin);
   } else if (!origin) {
     // Direct same-origin request
@@ -55,7 +63,7 @@ app.use((req, res, next) => {
   }
   res.header(
     'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept'
+    'Origin, X-Requested-With, Content-Type, Accept, Authorization'
   );
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   if (req.method === 'OPTIONS') {
@@ -81,8 +89,8 @@ function getErrorStatusCode(error: any): number {
   return 500;
 }
 
-// Health check endpoint
-app.get('/health', (_req: Request, res: Response) => {
+// Health check endpoints (both /health and /api/health for Vercel routing flexibility)
+const handleHealth = (_req: Request, res: Response) => {
   res.json({
     status: 'ok',
     service: 'HumanlyAI Backend',
@@ -91,7 +99,10 @@ app.get('/health', (_req: Request, res: Response) => {
     aiKeyConfigured: hasGeminiKey(),
     timestamp: new Date().toISOString(),
   });
-});
+};
+
+app.get('/health', handleHealth);
+app.get('/api/health', handleHealth);
 
 // Configuration status endpoint
 app.get('/api/config-status', (_req: Request, res: Response) => {
@@ -171,28 +182,32 @@ app.post('/api/set-api-key', async (req: Request, res: Response): Promise<void> 
     // Set runtime in-memory key
     setRuntimeGeminiKey(trimmedKey);
 
-    // Persist to .env file in workspace root
-    try {
-      const envPath = path.resolve(__dirname, '.env');
-      let envContent = '';
-      if (fs.existsSync(envPath)) {
-        envContent = fs.readFileSync(envPath, 'utf8');
-      }
+    // Persist to .env file when running in persistent environment (skip on read-only Vercel serverless)
+    if (!process.env.VERCEL) {
+      try {
+        const envPath = path.resolve(__dirname, '.env');
+        let envContent = '';
+        if (fs.existsSync(envPath)) {
+          envContent = fs.readFileSync(envPath, 'utf8');
+        }
 
-      if (envContent.includes('GEMINI_API_KEY=')) {
-        envContent = envContent.replace(/GEMINI_API_KEY=.*/g, `GEMINI_API_KEY="${trimmedKey}"`);
-      } else {
-        envContent += `\nGEMINI_API_KEY="${trimmedKey}"\nGEMINI_MODEL="${GEMINI_MODEL}"\nPORT=${PORT}\n`;
+        if (envContent.includes('GEMINI_API_KEY=')) {
+          envContent = envContent.replace(/GEMINI_API_KEY=.*/g, `GEMINI_API_KEY="${trimmedKey}"`);
+        } else {
+          envContent += `\nGEMINI_API_KEY="${trimmedKey}"\nGEMINI_MODEL="${GEMINI_MODEL}"\nPORT=${PORT}\n`;
+        }
+        fs.writeFileSync(envPath, envContent.trim() + '\n', 'utf8');
+      } catch (fsErr) {
+        console.warn('Could not write .env file:', fsErr);
       }
-      fs.writeFileSync(envPath, envContent.trim() + '\n', 'utf8');
-    } catch (fsErr) {
-      console.warn('Could not write .env file:', fsErr);
     }
 
     res.json({
       success: true,
       model: GEMINI_MODEL,
-      message: 'Gemini API key successfully verified, activated, and saved!',
+      message: process.env.VERCEL
+        ? 'Gemini API key active for this session! (Tip: Set GEMINI_API_KEY in Vercel Project Settings for permanent persistence).'
+        : 'Gemini API key successfully verified, activated, and saved!',
     });
   } catch (error: any) {
     res.status(500).json({ error: error.message || 'Failed to configure API key' });
