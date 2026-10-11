@@ -266,25 +266,26 @@ function HumanlyPlayground() {
         <PresetLibrary onSelectPreset={handleSelectPreset} />
 
         {/* Input Configuration & Transformation Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
           {/* Main Input Text Area (7 cols on lg) */}
-          <div className="lg:col-span-7 bg-white rounded-3xl border border-[#E8E2D5] p-6 shadow-sm space-y-4">
+          <div className="lg:col-span-7 bg-white rounded-2xl border border-[#E8E2D5] p-4 sm:p-5 shadow-xs space-y-3.5">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <FileText className="w-4 h-4 text-[#344E41]" />
-                <h2 className="text-sm font-bold text-[#22342B] tracking-tight">
+                <h2 className="text-xs sm:text-sm font-bold text-[#22342B] tracking-tight">
                   Source Communication Input
                 </h2>
               </div>
-              <div className="flex items-center gap-3">
-                <span className="text-xs text-[#6C7A72] font-mono">
+              <div className="flex items-center gap-2.5">
+                <span className="text-[11px] sm:text-xs text-[#6C7A72] font-mono">
                   {wordCount} words • {charCount} chars
                 </span>
                 {text && (
                   <button
+                    type="button"
                     onClick={() => setText('')}
                     title="Clear text"
-                    className="text-[#8A9A90] hover:text-[#22342B] transition-colors"
+                    className="text-[#8A9A90] hover:text-rose-600 p-1 rounded transition-colors cursor-pointer"
                   >
                     <Trash2 className="w-3.5 h-3.5" />
                   </button>
@@ -296,8 +297,8 @@ function HumanlyPlayground() {
               value={text}
               onChange={(e) => setText(e.target.value)}
               placeholder="Paste machine-generated or corporate text here to analyze robotic phrasing, adapt the tone, and run dual-layer validation on entities and meaning..."
-              rows={8}
-              className="w-full rounded-2xl border border-[#E8E2D5] p-4 text-sm font-sans leading-relaxed text-[#22342B] placeholder-[#8A9A90] focus:outline-hidden focus:ring-2 focus:ring-[#344E41]/20 focus:border-[#344E41] transition-all resize-y bg-[#FAF7F0]/40"
+              rows={6}
+              className="w-full rounded-xl border border-[#E8E2D5] p-3.5 text-xs sm:text-sm font-sans leading-relaxed text-[#22342B] placeholder-[#8A9A90] focus:outline-hidden focus:ring-2 focus:ring-[#344E41]/20 focus:border-[#344E41] transition-all resize-y min-h-[140px] max-h-[360px] bg-[#FAF7F0]/40"
             />
 
             {/* Protected Entities Input */}
@@ -307,12 +308,12 @@ function HumanlyPlayground() {
             />
 
             {/* Action Bar */}
-            <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div className="pt-1 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5">
               <button
                 type="button"
                 onClick={() => handleReset()}
                 disabled={!result && !text}
-                className="w-full sm:w-auto px-4 py-2.5 rounded-xl border border-[#E8E2D5] text-xs font-semibold text-[#5B7A6C] hover:text-[#22342B] hover:bg-[#F4EFE6] disabled:opacity-40 disabled:hover:bg-transparent transition-all flex items-center justify-center gap-2 cursor-pointer"
+                className="h-10 sm:h-11 px-4 rounded-xl border border-[#E8E2D5] text-xs font-semibold text-[#5B7A6C] hover:text-[#22342B] hover:bg-[#F4EFE6] disabled:opacity-40 disabled:hover:bg-transparent transition-all flex items-center justify-center gap-2 cursor-pointer"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
                 <span>Reset View</span>
@@ -322,7 +323,7 @@ function HumanlyPlayground() {
                 type="button"
                 onClick={handleProcess}
                 disabled={isProcessing || !text.trim()}
-                className="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#344E41] via-[#2F473B] to-[#24362D] hover:from-[#24362D] hover:to-[#1A2821] text-white font-semibold text-xs tracking-wide shadow-md shadow-[#344E41]/20 hover:shadow-[#344E41]/35 active:scale-98 transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                className="h-10 sm:h-11 px-6 rounded-xl bg-gradient-to-r from-[#344E41] via-[#2F473B] to-[#24362D] hover:from-[#24362D] hover:to-[#1A2821] text-white font-semibold text-xs tracking-wide shadow-md shadow-[#344E41]/20 hover:shadow-[#344E41]/35 active:scale-98 transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer shrink-0"
               >
                 {isProcessing ? (
                   <>
@@ -341,12 +342,12 @@ function HumanlyPlayground() {
 
             {/* Processing Steps Status indicator */}
             {isProcessing && (
-              <div className="pt-3 border-t border-[#E8E2D5]">
-                <div className="flex items-center gap-2.5 text-xs text-[#344E41] font-medium animate-pulse">
+              <div className="pt-2.5 border-t border-[#E8E2D5]">
+                <div className="flex items-center gap-2 text-xs text-[#344E41] font-medium animate-pulse">
                   <div className="w-2 h-2 rounded-full bg-[#344E41] animate-ping" />
                   <span>{processingStep}</span>
                 </div>
-                <div className="w-full bg-[#FAF7F0] h-1.5 rounded-full overflow-hidden mt-2 border border-[#E8E2D5]/60">
+                <div className="w-full bg-[#FAF7F0] h-1.5 rounded-full overflow-hidden mt-1.5 border border-[#E8E2D5]/60">
                   <div className="bg-[#344E41] h-full rounded-full animate-indeterminate" />
                 </div>
               </div>

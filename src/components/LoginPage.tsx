@@ -173,89 +173,118 @@ export const LoginPage: React.FC<LoginPageProps> = ({
       <main className="flex-1 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center w-full">
           
-          {/* Left Column: Editorial Product Narrative & Tangible Memo Sample */}
-          <div className="lg:col-span-6 space-y-8">
-            <div className="space-y-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EEF3F0] border border-[#344E41]/25 text-[#344E41] text-xs font-medium">
+          {/* Left Column: Editorial Product Narrative & Visual Benchmark */}
+          <div className="lg:col-span-6 space-y-6">
+            <div className="space-y-3">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EEF3F0] border border-[#344E41]/25 text-[#344E41] text-xs font-semibold">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#344E41]" />
                 <span>Dual-Layer Entity & Meaning Validation</span>
               </div>
 
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#22342B] tracking-tight leading-[1.15]">
-                Machine intelligence, calibrated for <span className="underline decoration-[#C2A56B]/60 decoration-3 underline-offset-4">human nuance</span>.
+              <h1 className="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-[#22342B] tracking-tight leading-[1.18]">
+                Machine intelligence, calibrated for <span className="underline decoration-[#C2A56B] decoration-3 underline-offset-4">human nuance</span>.
               </h1>
 
-              <p className="text-base sm:text-lg text-[#5B7A6C] leading-relaxed max-w-xl">
-                Raw AI outputs often sound cold, formulaic, and detached. HumanlyAI transforms 
-                stiff drafts into authentic, resonant communication — using dual-layer validation 
-                to help identify and preserve critical facts, dates, scores, and protected terms.
+              <p className="text-sm sm:text-base text-[#5B7A6C] leading-relaxed max-w-xl">
+                Transform stiff AI drafts into warm, authentic workplace communication while automatically verifying that critical facts, scores, dates, and names remain 100% intact.
               </p>
             </div>
 
-            {/* Tangible Workplace Memo Card */}
-            <div className="bg-white rounded-2xl border border-[#E8E2D5] shadow-lg shadow-[#344E41]/5 p-6 space-y-4 relative overflow-hidden">
-              <div className="flex items-center justify-between border-b border-[#E8E2D5] pb-3">
+            {/* Prominent Visual Transformation Comparison Card */}
+            <div className="bg-white rounded-2xl border border-[#E8E2D5] shadow-lg shadow-[#344E41]/5 p-5 space-y-3.5">
+              <div className="flex items-center justify-between border-b border-[#E8E2D5] pb-2.5">
                 <div className="flex items-center gap-2">
                   <FileText className="w-4 h-4 text-[#344E41]" />
                   <span className="text-xs font-bold uppercase tracking-wider text-[#22342B]">
-                    Live Transformation Benchmark
+                    Transformation Benchmark
                   </span>
                 </div>
-                <span className="text-[11px] font-mono text-[#6C7A72] bg-[#FAF7F0] px-2 py-0.5 rounded border border-[#E8E2D5]">
+                <span className="text-[10px] font-mono text-[#6C7A72] bg-[#FAF7F0] px-2 py-0.5 rounded border border-[#E8E2D5]">
                   DOC-REF #8201 · Recruiter Feedback
                 </span>
               </div>
 
-              {/* Before Section: The Robotic Draft */}
-              <div className="space-y-1.5">
-                <div className="text-[11px] font-semibold text-rose-700 uppercase tracking-wider flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-rose-500" />
-                  Stiff AI Draft (Detached & Formulaic)
+              {/* Two Clean Comparison Cards */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {/* 1. Stiff AI Draft Card */}
+                <div className="rounded-xl border border-rose-200/80 bg-rose-50/40 p-3.5 flex flex-col justify-between space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-rose-800 flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-rose-500" />
+                      Original Stiff AI Draft
+                    </span>
+                    <span className="text-[10px] text-rose-600 font-medium">Detached</span>
+                  </div>
+                  <p className="text-xs text-rose-950 font-mono leading-relaxed">
+                    "Furthermore, applicant{' '}
+                    <span className="bg-white/80 border border-rose-200 text-[#22342B] px-1 py-0.5 rounded font-semibold text-[11px]">
+                      Elena Rostova
+                    </span>{' '}
+                    achieved a score of{' '}
+                    <span className="bg-white/80 border border-rose-200 text-[#22342B] px-1 py-0.5 rounded font-semibold text-[11px]">
+                      3.5/5.0
+                    </span>
+                    . Regrettably, we cannot proceed at this juncture."
+                  </p>
+                  <div className="text-[10px] text-rose-700/80 pt-1 border-t border-rose-200/50">
+                    Marker: Overly rigid rejection formula
+                  </div>
                 </div>
-                <p className="text-xs text-rose-950 bg-rose-50/50 p-3 rounded-xl border border-rose-200/70 font-mono leading-relaxed">
-                  "Furthermore, it has come to our attention that applicant{' '}
-                  <span className="text-[#22342B] bg-rose-100 px-1 py-0.5 rounded font-semibold">Elena Rostova</span>{' '}
-                  achieved an evaluation score of{' '}
-                  <span className="text-[#22342B] bg-rose-100 px-1 py-0.5 rounded font-semibold">3.5/5.0</span>.
-                  Regrettably, we cannot proceed with your candidacy at this juncture."
-                </p>
+
+                {/* 2. HumanlyAI Refined Card */}
+                <div className="rounded-xl border border-[#344E41]/35 bg-[#EEF3F0]/70 p-3.5 flex flex-col justify-between space-y-2 ring-1 ring-[#344E41]/15">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#344E41] flex items-center gap-1.5">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#344E41]" />
+                      HumanlyAI Refined
+                    </span>
+                    <span className="text-[10px] font-semibold text-[#8C6D2D] bg-[#F5EEDC] px-1.5 py-0.5 rounded border border-[#C2A56B]/30">
+                      Authentic
+                    </span>
+                  </div>
+                  <p className="text-xs text-[#22342B] font-sans leading-relaxed">
+                    "Thank you for interviewing,{' '}
+                    <span className="bg-white border border-[#344E41]/25 text-[#344E41] px-1 py-0.5 rounded font-bold text-[11px]">
+                      Elena
+                    </span>
+                    ! While your score of{' '}
+                    <span className="bg-white border border-[#344E41]/25 text-[#344E41] px-1 py-0.5 rounded font-bold text-[11px]">
+                      3.5/5.0
+                    </span>{' '}
+                    showed strong systems depth, we're proceeding with candidates aligned to immediate milestones."
+                  </p>
+                  <div className="text-[10px] text-[#344E41] font-medium pt-1 border-t border-[#344E41]/15 flex items-center justify-between">
+                    <span>Tone: Warm & Constructive</span>
+                    <span className="font-semibold text-emerald-800">100% Facts Intact</span>
+                  </div>
+                </div>
               </div>
 
-              {/* After Section: The Humanly Refinement */}
-              <div className="space-y-1.5">
-                <div className="text-[11px] font-semibold text-[#344E41] uppercase tracking-wider flex items-center gap-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#344E41]" />
-                  HumanlyAI Refinement (Warm, Clear & Authentic)
+              {/* Factual Preservation Audit Bar */}
+              <div className="pt-1.5 flex flex-wrap items-center justify-between gap-2 text-xs border-t border-[#E8E2D5]">
+                <div className="flex items-center gap-1.5 text-[#344E41] font-medium text-[11px]">
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#344E41]" />
+                  <span>Dual-Layer Validation Audit:</span>
                 </div>
-                <p className="text-xs text-[#22342B] bg-[#EEF3F0]/60 p-3.5 rounded-xl border border-[#344E41]/25 leading-relaxed font-sans">
-                  "Thank you for interviewing with us,{' '}
-                  <span className="font-bold text-[#22342B]">Elena</span>! While your score of{' '}
-                  <span className="font-bold text-[#22342B]">3.5/5.0</span> highlighted strong expertise in
-                  distributed systems, we've decided to proceed with candidates closer to our immediate
-                  senior team roadmap."
-                </p>
-              </div>
-
-              {/* Verified Verification Stamp */}
-              <div className="pt-2 flex flex-wrap items-center justify-between gap-2 text-xs border-t border-[#E8E2D5]">
-                <div className="flex items-center gap-1.5 text-[#344E41] font-medium">
-                  <ShieldCheck className="w-4 h-4 text-[#344E41]" />
-                  <span>Dual-Layer Validation Checked</span>
-                </div>
-                <div className="text-[11px] text-[#6C7A72]">
-                  Protected: <span className="font-mono text-[#22342B]">Elena Rostova</span>, <span className="font-mono text-[#22342B]">3.5/5.0</span>
+                <div className="flex items-center gap-1.5 flex-wrap">
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#FAF7F0] border border-[#E8E2D5] text-[10px] text-[#22342B] font-mono">
+                    <span className="text-[#8C6D2D] font-bold">NAME:</span> Elena Rostova
+                  </span>
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#FAF7F0] border border-[#E8E2D5] text-[10px] text-[#22342B] font-mono">
+                    <span className="text-[#8C6D2D] font-bold">SCORE:</span> 3.5/5.0
+                  </span>
                 </div>
               </div>
             </div>
 
             {/* Testimonial Quote */}
-            <div className="p-4 rounded-xl bg-[#FAF7F0] border border-[#E8E2D5] flex items-start gap-3">
-              <Quote className="w-5 h-5 text-[#C2A56B] shrink-0 mt-0.5" />
+            <div className="p-3.5 rounded-xl bg-[#FAF7F0] border border-[#E8E2D5] flex items-start gap-2.5">
+              <Quote className="w-4 h-4 text-[#C2A56B] shrink-0 mt-0.5" />
               <div className="text-xs text-[#6C7A72] leading-relaxed">
-                <p className="italic text-[#22342B] font-medium mb-1">
-                  "Our hiring team sends hundreds of candidate notes weekly. HumanlyAI removes the robotic corporate chill while ensuring our feedback remains completely accurate."
+                <p className="italic text-[#22342B] font-medium mb-0.5">
+                  "Removes the robotic chill from high-volume candidate messages while guaranteeing all scores and dates are preserved."
                 </p>
-                <p className="text-[11px] text-[#6C7A72]">
+                <p className="text-[10px] text-[#6C7A72]">
                   <strong className="text-[#22342B] font-semibold">Sarah Jenkins</strong> · Lead Technical Recruiter
                 </p>
               </div>
