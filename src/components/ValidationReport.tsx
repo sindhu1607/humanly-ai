@@ -75,12 +75,12 @@ export const ValidationReport: React.FC<ValidationReportProps> = ({ validation }
               >
                 {validation.overallStatus}
               </span>
-              <h3 className="font-bold text-slate-900 text-sm">{validation.statusHeadline}</h3>
-              <span className="text-xs font-mono font-semibold px-2 py-0.5 rounded-md bg-slate-100 text-slate-700">
+              <h3 className="font-bold text-[#22342B] text-sm">{validation.statusHeadline}</h3>
+              <span className="text-xs font-mono font-semibold px-2 py-0.5 rounded-md bg-[#F5EEDC] text-[#8C6D2D] border border-[#C2A56B]/40">
                 Score: {deterministic.score}%
               </span>
             </div>
-            <p className="text-xs text-slate-600 mt-1 leading-relaxed">
+            <p className="text-xs text-[#6C7A72] mt-1 leading-relaxed">
               {validation.summaryReason}
             </p>
             {validation.actionableGuidance && (
@@ -93,7 +93,7 @@ export const ValidationReport: React.FC<ValidationReportProps> = ({ validation }
 
         <button
           onClick={() => setIsExpanded(!isExpanded)}
-          className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors"
+          className="p-1.5 rounded-lg text-[#6C7A72] hover:text-[#22342B] hover:bg-[#F4EFE6] transition-colors cursor-pointer"
         >
           {isExpanded ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
         </button>
@@ -103,16 +103,16 @@ export const ValidationReport: React.FC<ValidationReportProps> = ({ validation }
         <>
           {/* Quick Stats Grid */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-1">
-            <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200">
-              <div className="text-[11px] text-slate-500 font-medium">Preserved Entities</div>
-              <div className="text-sm font-bold text-slate-900 mt-0.5">
+            <div className="p-2.5 rounded-xl bg-[#FAF7F0] border border-[#E8E2D5]">
+              <div className="text-[11px] text-[#6C7A72] font-medium">Preserved Entities</div>
+              <div className="text-sm font-bold text-[#22342B] mt-0.5">
                 {deterministic.checksSummary.preservedCount} /{' '}
                 {deterministic.checksSummary.totalEntitiesFound}
               </div>
             </div>
 
-            <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200">
-              <div className="text-[11px] text-slate-500 font-medium">Numbers & Scores</div>
+            <div className="p-2.5 rounded-xl bg-[#FAF7F0] border border-[#E8E2D5]">
+              <div className="text-[11px] text-[#6C7A72] font-medium">Numbers & Scores</div>
               <div
                 className={`text-sm font-bold mt-0.5 ${
                   deterministic.checksSummary.numbersPreserved
@@ -124,8 +124,8 @@ export const ValidationReport: React.FC<ValidationReportProps> = ({ validation }
               </div>
             </div>
 
-            <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200">
-              <div className="text-[11px] text-slate-500 font-medium">Dates & Times</div>
+            <div className="p-2.5 rounded-xl bg-[#FAF7F0] border border-[#E8E2D5]">
+              <div className="text-[11px] text-[#6C7A72] font-medium">Dates & Times</div>
               <div
                 className={`text-sm font-bold mt-0.5 ${
                   deterministic.checksSummary.datesPreserved
@@ -137,12 +137,12 @@ export const ValidationReport: React.FC<ValidationReportProps> = ({ validation }
               </div>
             </div>
 
-            <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200">
-              <div className="text-[11px] text-slate-500 font-medium">Semantic Rating</div>
+            <div className="p-2.5 rounded-xl bg-[#FAF7F0] border border-[#E8E2D5]">
+              <div className="text-[11px] text-[#6C7A72] font-medium">Semantic Rating</div>
               <div
                 className={`text-sm font-bold mt-0.5 ${
                   semantic.meaningPreservationRating === 'EXACT'
-                    ? 'text-emerald-700'
+                    ? 'text-[#344E41]'
                     : semantic.meaningPreservationRating === 'SLIGHT_VARIATION'
                     ? 'text-amber-700'
                     : 'text-rose-700'
@@ -154,23 +154,23 @@ export const ValidationReport: React.FC<ValidationReportProps> = ({ validation }
           </div>
 
           {/* Sub Navigation */}
-          <div className="flex items-center gap-1.5 border-b border-slate-200 pb-2">
+          <div className="flex items-center gap-1.5 border-b border-[#E8E2D5] pb-2">
             <button
               onClick={() => setActiveTab('all')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors cursor-pointer ${
                 activeTab === 'all'
-                  ? 'bg-slate-900 text-white'
-                  : 'text-slate-600 hover:bg-slate-100'
+                  ? 'bg-[#344E41] text-[#FAF7F0]'
+                  : 'text-[#5B7A6C] hover:bg-[#EEF3F0]'
               }`}
             >
               All Validation Findings
             </button>
             <button
               onClick={() => setActiveTab('entities')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors cursor-pointer ${
                 activeTab === 'entities'
-                  ? 'bg-slate-900 text-white'
-                  : 'text-slate-600 hover:bg-slate-100'
+                  ? 'bg-[#344E41] text-[#FAF7F0]'
+                  : 'text-[#5B7A6C] hover:bg-[#EEF3F0]'
               }`}
             >
               Deterministic Entities ({deterministic.preservedEntities.length} Preserved /{' '}
@@ -178,10 +178,10 @@ export const ValidationReport: React.FC<ValidationReportProps> = ({ validation }
             </button>
             <button
               onClick={() => setActiveTab('semantic')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors cursor-pointer ${
                 activeTab === 'semantic'
-                  ? 'bg-slate-900 text-white'
-                  : 'text-slate-600 hover:bg-slate-100'
+                  ? 'bg-[#344E41] text-[#FAF7F0]'
+                  : 'text-[#5B7A6C] hover:bg-[#EEF3F0]'
               }`}
             >
               AI Semantic Audit ({semantic.findings.length} Items)
@@ -191,8 +191,8 @@ export const ValidationReport: React.FC<ValidationReportProps> = ({ validation }
           {/* Tab 1 or Tab 2: Deterministic Entity Matrix */}
           {(activeTab === 'all' || activeTab === 'entities') && (
             <div className="space-y-3">
-              <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider flex items-center gap-1.5">
-                <ShieldCheck className="w-3.5 h-3.5 text-indigo-600" />
+              <h4 className="text-xs font-bold text-[#22342B] uppercase tracking-wider flex items-center gap-1.5">
+                <ShieldCheck className="w-3.5 h-3.5 text-[#344E41]" />
                 <span>Deterministic Fact & Entity Tracking</span>
               </h4>
 
@@ -238,20 +238,20 @@ export const ValidationReport: React.FC<ValidationReportProps> = ({ validation }
 
               {/* Preserved Entities Chips */}
               <div>
-                <div className="text-[11px] font-medium text-slate-500 mb-1.5">
+                <div className="text-[11px] font-medium text-[#6C7A72] mb-1.5">
                   Faithfully Preserved Entities ({deterministic.preservedEntities.length}):
                 </div>
                 {deterministic.preservedEntities.length === 0 ? (
-                  <div className="text-xs text-slate-400 italic">No entities extracted.</div>
+                  <div className="text-xs text-[#8A9A90] italic">No entities extracted.</div>
                 ) : (
                   <div className="flex flex-wrap gap-1.5">
                     {deterministic.preservedEntities.map((e, idx) => (
                       <span
                         key={idx}
-                        className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-900 text-xs font-medium"
+                        className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#EEF3F0] border border-[#344E41]/25 text-[#22342B] text-xs font-medium"
                       >
-                        <CheckCircle2 className="w-3 h-3 text-emerald-600" />
-                        <span className="text-[10px] uppercase text-emerald-700 font-semibold">
+                        <CheckCircle2 className="w-3 h-3 text-[#344E41]" />
+                        <span className="text-[10px] uppercase text-[#344E41] font-semibold">
                           {e.type.replace('_', ' ')}:
                         </span>
                         <span>{e.value}</span>
@@ -266,18 +266,18 @@ export const ValidationReport: React.FC<ValidationReportProps> = ({ validation }
           {/* Tab 1 or Tab 3: AI Semantic Audit Findings */}
           {(activeTab === 'all' || activeTab === 'semantic') && (
             <div className="space-y-3 pt-2">
-              <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider flex items-center gap-1.5">
-                <Search className="w-3.5 h-3.5 text-indigo-600" />
+              <h4 className="text-xs font-bold text-[#22342B] uppercase tracking-wider flex items-center gap-1.5">
+                <Search className="w-3.5 h-3.5 text-[#344E41]" />
                 <span>AI Semantic Comparison Audit</span>
               </h4>
 
-              <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700 leading-relaxed">
-                <span className="font-semibold text-slate-900">Semantic Evaluation Summary: </span>
+              <div className="p-3 rounded-xl bg-[#FAF7F0] border border-[#E8E2D5] text-xs text-[#22342B] leading-relaxed">
+                <span className="font-semibold text-[#22342B]">Semantic Evaluation Summary: </span>
                 {semantic.explanation}
               </div>
 
               {semantic.findings.length === 0 ? (
-                <div className="p-3 text-center text-xs text-slate-500 bg-slate-50 rounded-xl">
+                <div className="p-3 text-center text-xs text-[#6C7A72] bg-[#FAF7F0] border border-[#E8E2D5] rounded-xl">
                   No semantic contradictions, unsupported claims, or omissions flagged by the audit.
                 </div>
               ) : (
@@ -293,7 +293,7 @@ export const ValidationReport: React.FC<ValidationReportProps> = ({ validation }
                             ? 'bg-rose-50/50 border-rose-200 text-rose-950'
                             : isReview
                             ? 'bg-amber-50/50 border-amber-200 text-amber-950'
-                            : 'bg-slate-50 border-slate-200 text-slate-800'
+                            : 'bg-[#FAF7F0] border-[#E8E2D5] text-[#22342B]'
                         }`}
                       >
                         <div className="flex items-center justify-between">
@@ -306,7 +306,7 @@ export const ValidationReport: React.FC<ValidationReportProps> = ({ validation }
                                 ? 'bg-rose-200 text-rose-900'
                                 : isReview
                                 ? 'bg-amber-200 text-amber-900'
-                                : 'bg-slate-200 text-slate-800'
+                                : 'bg-[#E8E2D5] text-[#22342B]'
                             }`}
                           >
                             {finding.severity.replace('_', ' ')}
@@ -317,16 +317,16 @@ export const ValidationReport: React.FC<ValidationReportProps> = ({ validation }
                         {(finding.originalSnippet || finding.rewriteSnippet) && (
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1 font-mono text-[11px]">
                             {finding.originalSnippet && (
-                              <div className="p-2 rounded-lg bg-white border border-slate-200">
-                                <span className="font-bold text-slate-500 block mb-0.5">
+                              <div className="p-2 rounded-lg bg-white border border-[#E8E2D5]">
+                                <span className="font-bold text-[#6C7A72] block mb-0.5">
                                   Original:
                                 </span>
                                 "{finding.originalSnippet}"
                               </div>
                             )}
                             {finding.rewriteSnippet && (
-                              <div className="p-2 rounded-lg bg-white border border-slate-200">
-                                <span className="font-bold text-slate-500 block mb-0.5">
+                              <div className="p-2 rounded-lg bg-white border border-[#E8E2D5]">
+                                <span className="font-bold text-[#6C7A72] block mb-0.5">
                                   Rewrite:
                                 </span>
                                 "{finding.rewriteSnippet}"

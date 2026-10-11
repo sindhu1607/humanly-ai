@@ -194,7 +194,7 @@ function HumanlyPlayground() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-100/70 text-slate-900 font-sans flex flex-col selection:bg-indigo-100 selection:text-indigo-900">
+    <div className="min-h-screen bg-[#FAF7F0] text-[#22342B] font-sans flex flex-col selection:bg-[#C2A56B]/30 selection:text-[#344E41]">
       <Header
         apiConfigured={apiConfigured}
         modelName={modelName}
@@ -208,11 +208,11 @@ function HumanlyPlayground() {
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
         {/* Missing API Key Guidance Banner if not configured */}
         {!apiConfigured && (
-          <div className="p-4 rounded-2xl bg-amber-50 border border-amber-300 text-amber-950 flex items-start justify-between gap-4 shadow-xs">
+          <div className="p-4 rounded-2xl bg-[#FBF7EE] border border-[#E5D5B3] text-[#7A612D] flex items-start justify-between gap-4 shadow-xs">
             <div className="flex items-start gap-3">
-              <ShieldAlert className="w-5 h-5 text-amber-700 shrink-0 mt-0.5" />
+              <ShieldAlert className="w-5 h-5 text-[#C2A56B] shrink-0 mt-0.5" />
               <div className="text-xs leading-relaxed">
-                <span className="font-bold text-sm block mb-1">
+                <span className="font-bold text-sm block mb-1 text-[#5A451B]">
                   Gemini API Key Required on Backend
                 </span>
                 <span>
@@ -222,9 +222,9 @@ function HumanlyPlayground() {
             </div>
             <button
               onClick={() => setIsApiKeyModalOpen(true)}
-              className="px-3.5 py-2 bg-amber-700 hover:bg-amber-800 text-white font-semibold text-xs rounded-xl shrink-0 transition-colors shadow-xs flex items-center gap-1.5 cursor-pointer"
+              className="px-3.5 py-2 bg-[#344E41] hover:bg-[#22342B] text-white font-semibold text-xs rounded-xl shrink-0 transition-colors shadow-xs flex items-center gap-1.5 cursor-pointer"
             >
-              <KeyRound className="w-3.5 h-3.5" />
+              <KeyRound className="w-3.5 h-3.5 text-[#DFC998]" />
               <span>Configure Key</span>
             </button>
           </div>
@@ -246,9 +246,9 @@ function HumanlyPlayground() {
                 error.toLowerCase().includes('unauthorized')) && (
                 <button
                   onClick={() => setIsApiKeyModalOpen(true)}
-                  className="px-2.5 py-1 bg-rose-600 hover:bg-rose-700 text-white text-xs font-semibold rounded-lg flex items-center gap-1 cursor-pointer transition-colors shadow-2xs"
+                  className="px-2.5 py-1 bg-[#344E41] hover:bg-[#22342B] text-white text-xs font-semibold rounded-lg flex items-center gap-1 cursor-pointer transition-colors shadow-2xs"
                 >
-                  <KeyRound className="w-3 h-3" />
+                  <KeyRound className="w-3 h-3 text-[#DFC998]" />
                   <span>Enter Key</span>
                 </button>
               )}
@@ -268,23 +268,23 @@ function HumanlyPlayground() {
         {/* Input Configuration & Transformation Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
           {/* Main Input Text Area (7 cols on lg) */}
-          <div className="lg:col-span-7 bg-white rounded-3xl border border-slate-200/80 p-6 shadow-sm space-y-4">
+          <div className="lg:col-span-7 bg-white rounded-3xl border border-[#E8E2D5] p-6 shadow-sm space-y-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <FileText className="w-4 h-4 text-indigo-600" />
-                <h2 className="text-sm font-bold text-slate-900 tracking-tight">
+                <FileText className="w-4 h-4 text-[#344E41]" />
+                <h2 className="text-sm font-bold text-[#22342B] tracking-tight">
                   Source Communication Input
                 </h2>
               </div>
               <div className="flex items-center gap-3">
-                <span className="text-xs text-slate-500 font-mono">
+                <span className="text-xs text-[#6C7A72] font-mono">
                   {wordCount} words • {charCount} chars
                 </span>
                 {text && (
                   <button
                     onClick={() => setText('')}
                     title="Clear text"
-                    className="text-slate-400 hover:text-slate-600 transition-colors"
+                    className="text-[#8A9A90] hover:text-[#22342B] transition-colors"
                   >
                     <Trash2 className="w-3.5 h-3.5" />
                   </button>
@@ -297,7 +297,7 @@ function HumanlyPlayground() {
               onChange={(e) => setText(e.target.value)}
               placeholder="Paste machine-generated or corporate text here to analyze robotic phrasing, adapt the tone, and run dual-layer validation on entities and meaning..."
               rows={8}
-              className="w-full rounded-2xl border border-slate-200 p-4 text-sm font-sans leading-relaxed text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all resize-y bg-slate-50/50"
+              className="w-full rounded-2xl border border-[#E8E2D5] p-4 text-sm font-sans leading-relaxed text-[#22342B] placeholder-[#8A9A90] focus:outline-hidden focus:ring-2 focus:ring-[#344E41]/20 focus:border-[#344E41] transition-all resize-y bg-[#FAF7F0]/40"
             />
 
             {/* Protected Entities Input */}
@@ -312,7 +312,7 @@ function HumanlyPlayground() {
                 type="button"
                 onClick={() => handleReset()}
                 disabled={!result && !text}
-                className="w-full sm:w-auto px-4 py-2.5 rounded-xl border border-slate-200 text-xs font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 disabled:opacity-40 disabled:hover:bg-transparent transition-all flex items-center justify-center gap-2"
+                className="w-full sm:w-auto px-4 py-2.5 rounded-xl border border-[#E8E2D5] text-xs font-semibold text-[#5B7A6C] hover:text-[#22342B] hover:bg-[#F4EFE6] disabled:opacity-40 disabled:hover:bg-transparent transition-all flex items-center justify-center gap-2 cursor-pointer"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
                 <span>Reset View</span>
@@ -322,18 +322,18 @@ function HumanlyPlayground() {
                 type="button"
                 onClick={handleProcess}
                 disabled={isProcessing || !text.trim()}
-                className="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white font-semibold text-xs tracking-wide shadow-md shadow-indigo-600/20 hover:shadow-indigo-600/30 active:scale-98 transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                className="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#344E41] via-[#2F473B] to-[#24362D] hover:from-[#24362D] hover:to-[#1A2821] text-white font-semibold text-xs tracking-wide shadow-md shadow-[#344E41]/20 hover:shadow-[#344E41]/35 active:scale-98 transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
               >
                 {isProcessing ? (
                   <>
-                    <Loader2 className="w-4 h-4 animate-spin text-white" />
+                    <Loader2 className="w-4 h-4 animate-spin text-[#DFC998]" />
                     <span>Processing Pipeline...</span>
                   </>
                 ) : (
                   <>
-                    <Sparkles className="w-4 h-4 text-indigo-200" />
+                    <Sparkles className="w-4 h-4 text-[#DFC998]" />
                     <span>Humanize & Validate Text</span>
-                    <ArrowRight className="w-3.5 h-3.5 ml-0.5" />
+                    <ArrowRight className="w-3.5 h-3.5 ml-0.5 text-[#DFC998]" />
                   </>
                 )}
               </button>
@@ -341,13 +341,13 @@ function HumanlyPlayground() {
 
             {/* Processing Steps Status indicator */}
             {isProcessing && (
-              <div className="pt-3 border-t border-slate-100">
-                <div className="flex items-center gap-2.5 text-xs text-indigo-700 font-medium animate-pulse">
-                  <div className="w-2 h-2 rounded-full bg-indigo-600 animate-ping" />
+              <div className="pt-3 border-t border-[#E8E2D5]">
+                <div className="flex items-center gap-2.5 text-xs text-[#344E41] font-medium animate-pulse">
+                  <div className="w-2 h-2 rounded-full bg-[#344E41] animate-ping" />
                   <span>{processingStep}</span>
                 </div>
-                <div className="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden mt-2">
-                  <div className="bg-indigo-600 h-full rounded-full animate-indeterminate" />
+                <div className="w-full bg-[#FAF7F0] h-1.5 rounded-full overflow-hidden mt-2 border border-[#E8E2D5]/60">
+                  <div className="bg-[#344E41] h-full rounded-full animate-indeterminate" />
                 </div>
               </div>
             )}
@@ -375,24 +375,24 @@ function HumanlyPlayground() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-slate-200 bg-white py-6 text-xs text-slate-500">
+      <footer className="border-t border-[#E8E2D5] bg-white py-6 text-xs text-[#6C7A72]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="flex items-center gap-2">
-            <span className="font-bold text-slate-800">HumanlyAI</span>
+            <span className="font-bold text-[#22342B]">HumanlyAI</span>
             <span>•</span>
             <span>AI Humanization & Refinement Platform</span>
           </div>
           <div className="flex items-center gap-4">
             <button
               onClick={() => setShowLoginPage(true)}
-              className="hover:text-indigo-600 transition-colors font-medium text-slate-600"
+              className="hover:text-[#344E41] transition-colors font-medium text-[#5B7A6C] cursor-pointer"
             >
               Account / Switch Persona
             </button>
             <span>•</span>
             <button
               onClick={() => setIsPrivacyOpen(true)}
-              className="hover:text-slate-900 transition-colors"
+              className="hover:text-[#22342B] transition-colors cursor-pointer"
             >
               Privacy & Responsible AI Notice
             </button>

@@ -87,31 +87,31 @@ export const ResultsComparison: React.FC<ResultsComparisonProps> = ({
   return (
     <div className="space-y-6">
       {/* Top Action Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-2xl bg-white border border-slate-200 shadow-xs">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-2xl bg-white border border-[#E8E2D5] shadow-xs">
         <div>
           <div className="flex items-center gap-2 flex-wrap">
-            <span className="text-xs font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-md bg-indigo-100 text-indigo-800">
+            <span className="text-xs font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-md bg-[#EEF3F0] text-[#344E41] border border-[#344E41]/20">
               {result.context.replace('_', ' ')}
             </span>
-            <span className="text-xs font-medium px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 capitalize">
+            <span className="text-xs font-medium px-2 py-0.5 rounded-md bg-[#F5EEDC] text-[#8C6D2D] border border-[#C2A56B]/30 capitalize">
               Tone: {result.tone}
             </span>
-            <span className="text-xs text-slate-400">
+            <span className="text-xs text-[#6C7A72]">
               • Processed in {result.processingTimeMs}ms
             </span>
           </div>
-          <p className="text-xs text-slate-600 mt-1 font-medium">{result.changesSummary}</p>
+          <p className="text-xs text-[#22342B] mt-1 font-medium">{result.changesSummary}</p>
         </div>
 
         <div className="flex items-center gap-2 flex-wrap">
           {/* View Mode Toggle */}
-          <div className="flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200 text-xs">
+          <div className="flex items-center bg-[#F4EFE6] p-1 rounded-xl border border-[#E8E2D5] text-xs">
             <button
               onClick={() => setViewMode('sideBySide')}
-              className={`flex items-center gap-1 px-2.5 py-1 rounded-lg font-medium transition-colors ${
+              className={`flex items-center gap-1 px-2.5 py-1 rounded-lg font-medium transition-colors cursor-pointer ${
                 viewMode === 'sideBySide'
-                  ? 'bg-white text-slate-900 shadow-2xs font-semibold'
-                  : 'text-slate-600 hover:text-slate-900'
+                  ? 'bg-white text-[#22342B] shadow-2xs font-semibold'
+                  : 'text-[#6C7A72] hover:text-[#22342B]'
               }`}
             >
               <Columns className="w-3.5 h-3.5" />
@@ -119,10 +119,10 @@ export const ResultsComparison: React.FC<ResultsComparisonProps> = ({
             </button>
             <button
               onClick={() => setViewMode('diff')}
-              className={`flex items-center gap-1 px-2.5 py-1 rounded-lg font-medium transition-colors ${
+              className={`flex items-center gap-1 px-2.5 py-1 rounded-lg font-medium transition-colors cursor-pointer ${
                 viewMode === 'diff'
-                  ? 'bg-white text-slate-900 shadow-2xs font-semibold'
-                  : 'text-slate-600 hover:text-slate-900'
+                  ? 'bg-white text-[#22342B] shadow-2xs font-semibold'
+                  : 'text-[#6C7A72] hover:text-[#22342B]'
               }`}
             >
               <GitCompare className="w-3.5 h-3.5" />
@@ -132,25 +132,25 @@ export const ResultsComparison: React.FC<ResultsComparisonProps> = ({
 
           <button
             onClick={handleCopy}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-xs font-medium text-slate-700 shadow-2xs transition-colors cursor-pointer"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-[#E8E2D5] bg-white hover:bg-[#F4EFE6] text-xs font-medium text-[#22342B] shadow-2xs transition-colors cursor-pointer"
           >
-            {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
+            {copied ? <Check className="w-3.5 h-3.5 text-[#344E41]" /> : <Copy className="w-3.5 h-3.5 text-[#5B7A6C]" />}
             <span>{copied ? 'Copied!' : 'Copy Result'}</span>
           </button>
 
           <button
             onClick={handleDownload}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-xs font-medium text-slate-700 shadow-2xs transition-colors cursor-pointer"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-[#E8E2D5] bg-white hover:bg-[#F4EFE6] text-xs font-medium text-[#22342B] shadow-2xs transition-colors cursor-pointer"
           >
-            <Download className="w-3.5 h-3.5" />
+            <Download className="w-3.5 h-3.5 text-[#5B7A6C]" />
             <span>Export TXT</span>
           </button>
 
           <button
             onClick={onReset}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 text-xs font-semibold shadow-xs transition-colors cursor-pointer"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#344E41] text-white hover:bg-[#22342B] text-xs font-semibold shadow-xs transition-colors cursor-pointer"
           >
-            <RotateCcw className="w-3.5 h-3.5" />
+            <RotateCcw className="w-3.5 h-3.5 text-[#DFC998]" />
             <span>New Analysis</span>
           </button>
         </div>
@@ -159,47 +159,47 @@ export const ResultsComparison: React.FC<ResultsComparisonProps> = ({
       {/* Side-by-Side Comparison Area */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
         {/* Left: Original Machine Text */}
-        <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs flex flex-col justify-between">
+        <div className="bg-white border border-[#E8E2D5] rounded-2xl p-5 shadow-xs flex flex-col justify-between">
           <div>
-            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+            <div className="flex items-center justify-between pb-3 border-b border-[#E8E2D5]">
               <div className="flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-slate-400" />
-                <h3 className="font-bold text-sm text-slate-900">Original Machine Text</h3>
+                <span className="w-2.5 h-2.5 rounded-full bg-[#8A9A90]" />
+                <h3 className="font-bold text-sm text-[#22342B]">Original Machine Text</h3>
               </div>
-              <span className="text-xs text-slate-500 font-mono">
+              <span className="text-xs text-[#6C7A72] font-mono">
                 {origWords} words ({result.originalText.length} chars)
               </span>
             </div>
 
-            <div className="mt-3 p-3.5 bg-slate-50/70 rounded-xl border border-slate-200/70 text-slate-800 text-xs sm:text-sm font-sans leading-relaxed whitespace-pre-wrap min-h-[220px]">
+            <div className="mt-3 p-3.5 bg-[#FAF7F0]/60 rounded-xl border border-[#E8E2D5] text-[#22342B] text-xs sm:text-sm font-sans leading-relaxed whitespace-pre-wrap min-h-[220px]">
               {result.originalText}
             </div>
           </div>
 
-          <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+          <div className="mt-4 pt-3 border-t border-[#E8E2D5] flex items-center justify-between text-xs text-[#6C7A72]">
             <span>Source text with formulaic cadences</span>
-            <span className="font-medium text-slate-700">Protected Terms: {result.protectedTerms.length}</span>
+            <span className="font-medium text-[#22342B]">Protected Terms: {result.protectedTerms.length}</span>
           </div>
         </div>
 
         {/* Right: Refined Human Rewrite (Editable) */}
-        <div className="bg-white border border-indigo-200 rounded-2xl p-5 shadow-xs flex flex-col justify-between ring-1 ring-indigo-500/10">
+        <div className="bg-white border border-[#344E41]/35 rounded-2xl p-5 shadow-xs flex flex-col justify-between ring-1 ring-[#344E41]/20">
           <div>
-            <div className="flex items-center justify-between pb-3 border-b border-indigo-100">
+            <div className="flex items-center justify-between pb-3 border-b border-[#E8E2D5]">
               <div className="flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-indigo-600 animate-pulse" />
-                <h3 className="font-bold text-sm text-slate-900">Refined Human Communication</h3>
-                <span className="text-[10px] uppercase font-bold px-1.5 py-0.5 rounded-md bg-indigo-50 text-indigo-700">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#344E41] animate-pulse" />
+                <h3 className="font-bold text-sm text-[#22342B]">Refined Human Communication</h3>
+                <span className="text-[10px] uppercase font-bold px-1.5 py-0.5 rounded-md bg-[#F5EEDC] text-[#8C6D2D] border border-[#C2A56B]/30">
                   Editable
                 </span>
               </div>
-              <div className="flex items-center gap-2 text-xs font-mono text-slate-500">
+              <div className="flex items-center gap-2 text-xs font-mono text-[#6C7A72]">
                 <span>
                   {newWords} words ({editedText.length} chars)
                 </span>
                 <span
                   className={`font-semibold ${
-                    wordDiff < 0 ? 'text-emerald-700' : 'text-slate-600'
+                    wordDiff < 0 ? 'text-[#344E41]' : 'text-[#6C7A72]'
                   }`}
                 >
                   ({wordDiff > 0 ? `+${wordDiff}` : wordDiff} words)
@@ -212,14 +212,14 @@ export const ResultsComparison: React.FC<ResultsComparisonProps> = ({
                 value={editedText}
                 onChange={handleTextChange}
                 rows={10}
-                className="w-full p-3.5 bg-indigo-50/20 focus:bg-white rounded-xl border border-indigo-200 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 text-slate-900 text-xs sm:text-sm font-sans leading-relaxed resize-y focus:outline-hidden transition-colors"
+                className="w-full p-3.5 bg-[#FAF7F0]/30 focus:bg-white rounded-xl border border-[#E8E2D5] focus:border-[#344E41] focus:ring-1 focus:ring-[#344E41] text-[#22342B] text-xs sm:text-sm font-sans leading-relaxed resize-y focus:outline-hidden transition-colors"
                 placeholder="Edit rewritten text here..."
               />
             </div>
           </div>
 
-          <div className="mt-4 pt-3 border-t border-indigo-100 flex items-center justify-between">
-            <span className="text-xs text-slate-500">
+          <div className="mt-4 pt-3 border-t border-[#E8E2D5] flex items-center justify-between">
+            <span className="text-xs text-[#6C7A72]">
               {isModified ? 'Text modified by user' : 'Authentic human phrasing'}
             </span>
 
@@ -227,9 +227,9 @@ export const ResultsComparison: React.FC<ResultsComparisonProps> = ({
               <button
                 onClick={handleTriggerRevalidate}
                 disabled={isRevalidating}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-semibold shadow-xs transition-colors cursor-pointer"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#8C6D2D] hover:bg-[#735721] text-white text-xs font-semibold shadow-xs transition-colors cursor-pointer"
               >
-                <RefreshCw className={`w-3.5 h-3.5 ${isRevalidating ? 'animate-spin' : ''}`} />
+                <RefreshCw className={`w-3.5 h-3.5 text-[#DFC998] ${isRevalidating ? 'animate-spin' : ''}`} />
                 <span>{isRevalidating ? 'Revalidating...' : 'Rerun Validation on Edit'}</span>
               </button>
             )}
